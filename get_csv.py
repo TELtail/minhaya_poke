@@ -5,6 +5,12 @@ import time
 import random
 import csv
 
+def check_dont_need_text(text_str,check_text):
+    if check_text in text_str:
+        text_str = text_str.replace(check_text,"")
+    
+    return text_str
+
 # WebDriver のオプションを設定する
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -13,6 +19,7 @@ driver = webdriver.Chrome(options=options)
 
 driver.get('https://wiki.xn--rckteqa2e.com/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E4%B8%80%E8%A6%A7')
 
+check_text_list = ["(X)","(Y)","(ピカブイ)","(B2W2)","(ソード)","(シールド)"]
 
 with open("zukan.csv","w",newline="", encoding='utf_8_sig') as zukan_csv_file:
     writer = csv.writer(zukan_csv_file)
@@ -37,12 +44,8 @@ with open("zukan.csv","w",newline="", encoding='utf_8_sig') as zukan_csv_file:
             text_str = scr.text #図巻説明文を取得
             if pokemon_name not in text_str and "(漢字)" in text_str: #(漢字)の文字が入っていて、そのポケモンの名前自体が入っていない図巻説明のみを取得
                 text_str = text_str.replace("(漢字)","")
-                if "(X)" in text_str:
-                    text_str = text_str.replace("(X)","")
-                if "(Y)" in text_str:
-                    text_str = text_str.replace("(Y)","")
-                if "(ピカブイ)" in text_str:
-                    text_str = text_str.replace("(ピカブイ)","")
+                for check_text in check_text_list:
+                    text_str = check_dont_need_text(text_str,check_text)
                 candidate_list.append(text_str) #(漢字)を排除
         
         for selected_text in random.sample(candidate_list,min(5,len(candidate_list))): #テキスト数は最大で5個まで
@@ -54,3 +57,5 @@ with open("zukan.csv","w",newline="", encoding='utf_8_sig') as zukan_csv_file:
 
     driver.save_screenshot(f"./test.png") #スクショ
     driver.quit()
+
+
