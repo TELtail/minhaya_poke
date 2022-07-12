@@ -19,7 +19,7 @@ driver = webdriver.Chrome(options=options)
 
 driver.get('https://wiki.xn--rckteqa2e.com/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E4%B8%80%E8%A6%A7')
 
-check_text_list = ["(X)","(Y)","(ピカブイ)","(B2W2)","(ソード)","(シールド)"]
+check_text_list = ["(X)","(Y)","(ピカブイ)","(B2W2)","(ソード)","(シールド)","[dex 1]","B2W2・Y)","BW/B2W2)","X・シールド)","Yまで)"," "]
 
 with open("zukan.csv","w",newline="", encoding='utf_8_sig') as zukan_csv_file:
     writer = csv.writer(zukan_csv_file)
