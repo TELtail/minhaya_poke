@@ -46,7 +46,7 @@ with open("zukan.csv","w",newline="", encoding='utf_8_sig') as zukan_csv_file:
                 text_str = text_str.replace("(漢字)","")
                 for check_text in check_text_list:
                     text_str = check_dont_need_text(text_str,check_text)
-                candidate_list.append(text_str) #(漢字)を排除
+                candidate_list.append(text_str[1:]) #(漢字)を排除
         
         for selected_text in random.sample(candidate_list,min(5,len(candidate_list))): #テキスト数は最大で5個まで
             print(selected_text)
