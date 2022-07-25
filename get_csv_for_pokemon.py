@@ -48,7 +48,7 @@ with open("zukan.csv","w",newline="", encoding='utf_8_sig') as zukan_csv_file:
                     text_str = check_dont_need_text(text_str,check_text)
                 candidate_list.append(text_str) #(漢字)を排除
         
-        for selected_text in random.sample(candidate_list,min(5,len(candidate_list))): #テキスト数は最大で5個まで
+        for selected_text in random.sample(candidate_list,min(2,len(candidate_list))): #テキスト数は最大で5個まで
             print(selected_text)
             writer.writerow([selected_text,pokemon_name]) #csvに書き込み
         
